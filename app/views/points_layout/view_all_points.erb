@@ -1,0 +1,33 @@
+<% content_for :header_tags do %>
+    <%= javascript_include_tag "points", plugin: "redmine_control_point" %>
+    <%= stylesheet_link_tag 'points', plugin: 'redmine_control_point' %>
+<% end %>
+
+<div class="contextual">
+<a href="#" class="icon icon-points-expended" onclick="toggleTablesPointsExpended(this);">развернуть<a>
+<%= link_to "свернуть", "#", {class: "icon icon-points-collapsed", onclick: "toggleTablesPointsCollapsed(this);"} %>
+</div>
+
+<h2>Котрольные точки</h2>
+
+
+<div class="autoscroll">
+<% @projects_list.each do |project| %>
+<% points=@points_list.where( project_id: project.id )%>
+<% unless points.blank? %>
+
+<div class="collapsed">
+<h3 class="icon icon-collapsed"><a href="#" onclick="toggleTablePoints(this);" > <%= project.name %></a></h3>
+
+
+
+<div class=" points <%= project.name%> table-collapsed" style="display: none">
+
+<%= render "patrials/table_points", points: points, issues_list: @issues_list, points_for_one_project: false %>
+
+
+  </div>
+  </div>
+  <% end %>
+  <% end %>
+</div>

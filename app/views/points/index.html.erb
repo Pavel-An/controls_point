@@ -1,0 +1,16 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'points', plugin: 'redmine_control_point' %>
+<% end %>
+
+<div class="contextual">
+<%= link_to "Добавить точку", new_project_point_path, class: "icon icon-add new-point" %>
+</div>
+
+<h2>Котрольные точки</h2>
+
+<div class="autoscroll">
+  
+<%= render "patrials/table_points", 
+  points: @points, issues_list: @issues, 
+  points_for_one_project: true,  project: @project%>
+</div>

@@ -1,0 +1,39 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'new_points', plugin: 'redmine_control_point' %>
+<% end %>
+
+<h2>Добавить точку</h2>
+
+<div class="box points_new">
+<%= form_with model: [@project, @point] do |form| %>
+ <div>
+    <%= form.hidden_field :project_id %>
+</div>
+
+<div class="autoscroll">
+  <table class="list points-list-new-add"> 
+  <thead>
+      <th class="issue_checkbox"></th>
+      <th class="issue_id" style="width: 10%">Задача</th>
+      <th class="subject">Тема</th>
+  </thead>
+  <tbody>
+  <% @issues.each do |issue| -%>
+    <% if @points.where("issue_id=?", issue.id).blank? && !issue.status.is_closed && !issue.due_date.nil?%>
+    <tr id="point-new-issue-<%= issue.id %>" class="<%= cycle("odd", "even") %>" > 
+      <td class="checkbox issue-<%= issue.id %>"><%= form.check_box( "issue_id", {:multiple => true, class: "checkbox" }, issue.id, nil ) %></td>
+      <td class="issue_id issue-<%= issue.id %>"><%= link_to issue.id, issue_path(issue.id) %></td>
+      <td class="subject issue-<%= issue.subject %>"><%= link_to issue.subject, issue_path(issue.id) %></td>
+    </tr>
+    <% end -%>
+  <% end %>
+  </tbody>
+  </table>
+</div>
+</div>
+
+  <div>
+    <%= form.submit "Сохранить" %>
+    <%= link_to "Отмена", project_points_path %>
+  </div>
+<% end %> 

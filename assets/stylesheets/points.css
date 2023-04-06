@@ -1,0 +1,35 @@
+.icon-points-expended { background-image: url(../images/plus.png); }
+.icon-points-collapsed { background-image: url(../images/minus.png); }
+
+.points { padding-bottom: 15px; }
+
+.days.left { color: #42b883; }
+.days.late { color: #eb2632; }
+
+.point_signal {
+  margin-top: 1px;
+  margin-bottom: 1px;
+  margin-left: 3px;
+  margin-right: 3px;
+  border-width: 0.5em;
+  border-radius: 10px;
+  border-style: solid;
+}
+.point_signal:hover::after {
+  content: attr(data_title);
+  position: absolute;
+  z-index: inherit;
+  background: rgba(255,255,230,0.9);
+  font-size: 11px;
+  padding: 5px 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  left: 4%;
+}
+
+.point_signal.good { border-color: #42b883; }
+.point_signal.attension { border-color: #ff9a3c; }
+.point_signal.overdue { border-color: #eb2632; }
+.point_signal.done { border-style: none; }
+
+.list, points-list-new-add { border: none; }
